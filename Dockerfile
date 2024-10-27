@@ -20,4 +20,4 @@ EXPOSE 5000
 ENV PYTHONUNBUFFERED=1
 
 # Run the application
-CMD ["gunicorn","-b", "0.0.0.0:5000", "-w", "2", "-k", "gevent", "--worker-tmp-dir", "/dev/shm", "run:app", "--timeout", "1000"]
+CMD ["gunicorn","-b", "0.0.0.0:5000", "-w", "2", "-k", "gevent", "--worker-tmp-dir", "/dev/shm", "main:app", "--timeout", "1000"]
