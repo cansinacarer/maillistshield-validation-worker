@@ -431,12 +431,12 @@ class Email:
 
         # If this is not our bogus email address we are testing
         else:
-            # If the mail server returns 250 or 251 in the 4th response
+            # If the mail server returns 250 or 251 in the 3rd response
             # we know that the email is deliverable but we don't know
             # whether this is because the domain has a catch all address
             if (
-                self.smtp_response[3]["code"] == "250"
-                or self.smtp_response[3]["code"] == "251"
+                self.smtp_response[2]["code"] == "250"
+                or self.smtp_response[2]["code"] == "251"
             ):
 
                 # Either way, sending to this address will work since it returned 250
