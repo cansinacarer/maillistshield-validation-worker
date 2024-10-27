@@ -100,7 +100,7 @@ class Email:
         self.status_detail = ""
 
     # Main method of this class
-    def verify(self):
+    def validate(self):
 
         # If the syntax isn't valid, no need to do the rest
         self.check_syntax()
@@ -281,7 +281,7 @@ class Email:
             self.smtp_provider_ip_ptr = Email.get_ptr_record(self.smtp_provider_ip)
             self.has_mx_records = True
         except:
-            # We pass here because self.verify() will quit if has_mx_records is False
+            # We pass here because self.validate() will quit if has_mx_records is False
             pass
 
     def check_if_disposable(self):
@@ -444,12 +444,12 @@ class Email:
                     "34cq0f89unymc43fn0um" + "@" + self.fqdn
                 )
 
-                # Then try to verify that
+                # Then try to validate that
                 # TODO: We can save execution time by not running all then verifications for it
                 instance_for_catch_all_testing = Email(
                     bogus_email_for_catch_all_testing, True
                 )
-                bogus_address_result = instance_for_catch_all_testing.verify()
+                bogus_address_result = instance_for_catch_all_testing.validate()
 
                 # If the mail server returns 250 or 251 for our bogus email address as well,
                 # we know that is has a catch all inbox
@@ -485,7 +485,7 @@ class Email:
 
             if self.response_matched_phrases_in_list(blacklist_messages):
                 self.status = "unknown"
-                self.status_detail = "email provider does not allow us to verify"
+                self.status_detail = "email provider does not allow us to validate"
 
             # If nothing above set a status
             if self.status == "":

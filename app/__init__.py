@@ -10,8 +10,8 @@ def home():
     return jsonify({"message": "Not allowed"}), 405
 
 
-@app.route("/verify-single", methods=["POST"])
-def verify_email():
+@app.route("/validate", methods=["POST"])
+def validate_email():
     try:
         data = request.get_json()
     except Exception as e:
@@ -25,7 +25,7 @@ def verify_email():
 
     email = Email(data["email"])
 
-    result = email.verify()
+    result = email.validate()
 
     print(result)
     return jsonify(result)
