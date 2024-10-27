@@ -420,6 +420,16 @@ class Email:
 
         return matched
 
+    # Google and Yahoo sends these codes for the standard case of a valid email
+    def is_standard_valid_case(self):
+        if (
+            self.smtp_response[1]["code"] == "220"
+            and self.smtp_response[2]["code"] == "250"
+            and self.smtp_response[3]["code"] == "250"
+            and self.smtp_response[4]["code"] == "221"
+        ):
+            return True
+
     def evaluate_smtp_connection(self):
         # Obtain the SMTP responses
         self.smtp_response = self.make_bogus_smtp_connection()
@@ -438,6 +448,12 @@ class Email:
                 self.smtp_response[3]["code"] == "250"
                 or self.smtp_response[3]["code"] == "251"
             ):
+
+                # Either way, sending to this address will work since it returned 250
+                self.status = "valid"
+                self.status_detail = (
+                    "email provider confirmed that the email address is deliverable"
+                )
 
                 # To test if it responds 250 for all addresses, we make up an address
                 bogus_email_for_catch_all_testing = (
@@ -459,12 +475,6 @@ class Email:
                 ):
                     self.is_catch_all = True
 
-                # Either way, sending to this address will work since it returned 250
-                self.status = "valid"
-                self.status_detail = (
-                    "email provider confirmed that the email address is deliverable"
-                )
-
             # Check if this is a disabled address
             if self.response_matched_phrases_in_list(account_disabled_messages):
                 self.status = "disabled"
@@ -472,20 +482,29 @@ class Email:
                     "email provider confirmed that the email address is disabled"
                 )
 
+            # Check if this is a full mailbox case
             if self.response_matched_phrases_in_list(mailbox_full_messages):
                 self.status = "valid"
                 self.status_detail = "email address exists but mailbox is full"
                 self.is_mailbox_full = True
 
+            # Check if this is an invalid email address case
             if self.response_matched_phrases_in_list(invalid_email_messages):
                 self.status = "invalid"
                 self.status_detail = (
                     "email provider confirmed that email address does not exist"
                 )
 
+            # Check if this is a case where we are blacklisted
             if self.response_matched_phrases_in_list(blacklist_messages):
                 self.status = "unknown"
                 self.status_detail = "email provider does not allow us to validate"
+
+            # if self.is_standard_valid_case():
+            #     self.status = "valid"
+            #     self.status_detail = (
+            #         "email provider confirmed that the email address is deliverable"
+            #     )
 
             # If nothing above set a status
             if self.status == "":
