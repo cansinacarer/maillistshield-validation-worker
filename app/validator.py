@@ -496,7 +496,7 @@ class Email:
                     or self.smtp_response[3]["code"][0] == "5"
                 ):
                     self.status = "likely_invalid"
-                    self.status = "email provider rejects our connection requests, but we are not blacklisted, which likely means email deliveries will fail"
+                    self.status_detail = "email provider rejects our connection requests, but we are not blacklisted, which likely means email deliveries will fail"
 
             # If nothing above set a status
             if self.status == "":
