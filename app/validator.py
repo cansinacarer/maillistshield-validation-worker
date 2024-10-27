@@ -420,16 +420,6 @@ class Email:
 
         return matched
 
-    # Google and Yahoo sends these codes for the standard case of a valid email
-    def is_standard_valid_case(self):
-        if (
-            self.smtp_response[1]["code"] == "220"
-            and self.smtp_response[2]["code"] == "250"
-            and self.smtp_response[3]["code"] == "250"
-            and self.smtp_response[4]["code"] == "221"
-        ):
-            return True
-
     def evaluate_smtp_connection(self):
         # Obtain the SMTP responses
         self.smtp_response = self.make_bogus_smtp_connection()
@@ -499,12 +489,6 @@ class Email:
             if self.response_matched_phrases_in_list(blacklist_messages):
                 self.status = "unknown"
                 self.status_detail = "email provider does not allow us to validate"
-
-            # if self.is_standard_valid_case():
-            #     self.status = "valid"
-            #     self.status_detail = (
-            #         "email provider confirmed that the email address is deliverable"
-            #     )
 
             # If nothing above set a status
             if self.status == "":
