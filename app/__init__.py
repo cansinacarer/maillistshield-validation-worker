@@ -1,8 +1,11 @@
 from flask import Flask, jsonify, request
+from decouple import config
 
 from .validator import Email
 
 app = Flask(__name__)
+
+API_KEY = config("API_KEY", default="")
 
 
 @app.route("/")
@@ -17,10 +20,13 @@ def validate_email():
     except Exception as e:
         return jsonify({"error": "Invalid JSON format", "message": str(e)}), 400
 
-    if not data or "email" not in data:
-        return jsonify({"error": "Email parameter is missing"}), 400
+    if not data or "api_key" not in data:
+        return jsonify({"error": "Unauthorized!"}), 401
 
-    if not data or "email" not in data:
+    if data["api_key"] != API_KEY:
+        return jsonify({"error": "Unauthorized!"}), 401
+
+    if "email" not in data:
         return jsonify({"error": "Email parameter is missing"}), 400
 
     email = Email(data["email"])
