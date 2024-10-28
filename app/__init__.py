@@ -39,9 +39,4 @@ def validate_email():
 
 @app.route("/status", methods=["GET"])
 def status():
-    try:
-        data = request.get_json()
-    except Exception as e:
-        return jsonify({"error": "Invalid JSON format", "message": str(e)}), 400
-
     return jsonify({"status": "OK"}), 200
