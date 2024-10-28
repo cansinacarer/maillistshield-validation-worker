@@ -22,7 +22,7 @@ def validate_email():
 
     if not data or "api_key" not in data:
         return jsonify({"error": "Unauthorized!"}), 401
-
+    
     if data["api_key"] != API_KEY:
         return jsonify({"error": "Unauthorized!"}), 401
 
@@ -35,3 +35,12 @@ def validate_email():
 
     print(result)
     return jsonify(result)
+
+@app.route("/status", methods=["GET"]):
+def status():
+    try:
+        data = request.get_json()
+    except Exception as e:
+        return jsonify({"error": "Invalid JSON format", "message": str(e)}), 400
+    
+    return jsonify({"status": "OK"}), 200
