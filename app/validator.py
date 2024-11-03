@@ -88,6 +88,9 @@ class Email:
         # Catch-all (all accounts exist)
         self.is_catch_all = False
 
+        # Likely spam trap
+        self.is_likely_spam_trap = False
+
         # Is mailbox full?
         # Will soft bounce
         self.is_mailbox_full = False
@@ -467,6 +470,7 @@ class Email:
 
             # Check if this is a disabled address
             if self.response_matched_phrases_in_list(account_disabled_messages):
+                self.is_likely_spam_trap = True
                 self.status = "disabled"
                 self.status_detail = (
                     "email provider confirmed that the email address is disabled"
