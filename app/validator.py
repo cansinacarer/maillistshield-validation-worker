@@ -174,7 +174,6 @@ class Email:
 
     def parse_account(self):
         self.account = self.email.split("@")[0]
-        self.is_role = self.account in role_email_accounts
 
     def check_if_alias(self):
         self.is_alias = "+" in self.account
@@ -216,6 +215,7 @@ class Email:
     def parse_account_alias_stripped(self):
         self.account_alias_stripped = self.account.split("+")[0]
         self.email_alias_stripped = self.account_alias_stripped + "@" + self.fqdn
+        self.is_role = self.account in role_email_accounts
 
     def check_if_free_provider(self):
         # Is fqdn in the free providers list?
