@@ -36,6 +36,10 @@ def validate_email():
     # If this is not a request for debugging, remove some keys
     is_debug = data.get("debug", False)
     if not is_debug:
+        result.pop("autodiscover_domain", None)
+        result.pop("autodiscover_host", None)
+        result.pop("autodiscover_host_tld", None)
+        result.pop("is_catch_all_test", None)
         result.pop("phrase_matches", None)
         result.pop("smtp_response", None)
 

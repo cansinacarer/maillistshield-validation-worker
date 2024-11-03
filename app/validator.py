@@ -86,7 +86,7 @@ class Email:
         self.smtp_response = []
 
         # Catch-all (all accounts exist)
-        self.is_catch_all = False
+        self.has_catch_all = False
 
         # Likely spam trap
         self.is_likely_spam_trap = False
@@ -466,7 +466,7 @@ class Email:
                     bogus_address_result["smtp_response"][3]["code"] == "250"
                     or bogus_address_result["smtp_response"][3]["code"] == "251"
                 ):
-                    self.is_catch_all = True
+                    self.has_catch_all = True
 
             # Check if this is a disabled address
             if self.response_matched_phrases_in_list(account_disabled_messages):
