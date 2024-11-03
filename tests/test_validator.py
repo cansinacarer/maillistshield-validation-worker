@@ -32,7 +32,7 @@ class TestEmail(unittest.TestCase):
         email = Email("info@cansin.net")
         result = email.validate()
         self.assertIsInstance(result, dict)
-        self.assertTrue(result.get("is_catch_all"))
+        self.assertTrue(result.get("has_catch_all"))
         self.assertTrue(result.get("is_role"))
 
     def test_validate_disposable(self):
