@@ -5490,6 +5490,7 @@ email_provider_names_by_autodiscover_domain = {
 
 email_provider_names_by_smtp_provider_host_domain = {
     "gmail": "google",
+    "googlemail": "google",
     "yahoo": "yahoo",
     "outlook": "microsoft",
     "icloud": "apple",

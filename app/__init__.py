@@ -33,6 +33,12 @@ def validate_email():
 
     result = email.validate()
 
+    # If this is not a request for debugging, remove some keys
+    is_debug = data.get("debug", False)
+    if not is_debug:
+        result.pop("phrase_matches", None)
+        result.pop("smtp_response", None)
+
     print(result)
     return jsonify(result)
 
