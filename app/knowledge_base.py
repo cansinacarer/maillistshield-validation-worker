@@ -5492,6 +5492,7 @@ email_provider_names_by_smtp_provider_host_domain = {
     "gmail": "google",
     "googlemail": "google",
     "yahoo": "yahoo",
+    "yahoodns": "yahoo",
     "outlook": "microsoft",
     "icloud": "apple",
     "aol": "aol",
