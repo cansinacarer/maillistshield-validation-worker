@@ -1,4 +1,4 @@
-# MailListShield Email Validation Worker
+# Mail List Shield - Email Validation Worker
 
 [![Build and Deploy Worker 1](https://github.com/cansinacarer/maillistshield-validation-worker/actions/workflows/deploy-worker-1.yml/badge.svg)](https://github.com/cansinacarer/maillistshield-validation-worker/actions/workflows/deploy-worker-1.yml)
 [![Build and Deploy Worker 2](https://github.com/cansinacarer/maillistshield-validation-worker/actions/workflows/deploy-worker-2.yml/badge.svg)](https://github.com/cansinacarer/maillistshield-validation-worker/actions/workflows/deploy-worker-2.yml)
