@@ -15,3 +15,7 @@ The other services that use this worker try multiple workers and use the best re
 **Job States:**
 
 This service does not change the job state, because it only works with individual email addresses and is unaware of the files.
+
+---
+
+See the [main repository](https://github.com/cansinacarer/maillistshield-com) for a complete list of other microservices.
